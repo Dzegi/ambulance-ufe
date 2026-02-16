@@ -6,6 +6,8 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface Cv1AmbulanceWlList {
+    }
     interface MyComponent {
         /**
           * The first name
@@ -22,6 +24,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLCv1AmbulanceWlListElement extends Components.Cv1AmbulanceWlList, HTMLStencilElement {
+    }
+    var HTMLCv1AmbulanceWlListElement: {
+        prototype: HTMLCv1AmbulanceWlListElement;
+        new (): HTMLCv1AmbulanceWlListElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -29,10 +37,13 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "cv1-ambulance-wl-list": HTMLCv1AmbulanceWlListElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface Cv1AmbulanceWlList {
+    }
     interface MyComponent {
         /**
           * The first name
@@ -47,15 +58,24 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+
+    interface MyComponentAttributes {
+        "first": string;
+        "middle": string;
+        "last": string;
+    }
+
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "cv1-ambulance-wl-list": Cv1AmbulanceWlList;
+        "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "cv1-ambulance-wl-list": LocalJSX.IntrinsicElements["cv1-ambulance-wl-list"] & JSXBase.HTMLAttributes<HTMLCv1AmbulanceWlListElement>;
+            "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
 }
