@@ -6,76 +6,32 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface Cv1AmbulanceWlList {
-    }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface TjAmbulanceWlList {
     }
 }
 declare global {
-    interface HTMLCv1AmbulanceWlListElement extends Components.Cv1AmbulanceWlList, HTMLStencilElement {
+    interface HTMLTjAmbulanceWlListElement extends Components.TjAmbulanceWlList, HTMLStencilElement {
     }
-    var HTMLCv1AmbulanceWlListElement: {
-        prototype: HTMLCv1AmbulanceWlListElement;
-        new (): HTMLCv1AmbulanceWlListElement;
-    };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
-    }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLTjAmbulanceWlListElement: {
+        prototype: HTMLTjAmbulanceWlListElement;
+        new (): HTMLTjAmbulanceWlListElement;
     };
     interface HTMLElementTagNameMap {
-        "cv1-ambulance-wl-list": HTMLCv1AmbulanceWlListElement;
-        "my-component": HTMLMyComponentElement;
+        "tj-ambulance-wl-list": HTMLTjAmbulanceWlListElement;
     }
 }
 declare namespace LocalJSX {
-    interface Cv1AmbulanceWlList {
+    interface TjAmbulanceWlList {
     }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
-    }
-
-    interface MyComponentAttributes {
-        "first": string;
-        "middle": string;
-        "last": string;
-    }
-
     interface IntrinsicElements {
-        "cv1-ambulance-wl-list": Cv1AmbulanceWlList;
-        "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
+        "tj-ambulance-wl-list": TjAmbulanceWlList;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "cv1-ambulance-wl-list": LocalJSX.IntrinsicElements["cv1-ambulance-wl-list"] & JSXBase.HTMLAttributes<HTMLCv1AmbulanceWlListElement>;
-            "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "tj-ambulance-wl-list": LocalJSX.IntrinsicElements["tj-ambulance-wl-list"] & JSXBase.HTMLAttributes<HTMLTjAmbulanceWlListElement>;
         }
     }
 }
