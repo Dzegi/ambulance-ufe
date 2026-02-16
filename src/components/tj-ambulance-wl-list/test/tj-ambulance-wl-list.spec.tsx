@@ -8,9 +8,9 @@ describe('tj-ambulance-wl-list', () => {
       html: `<tj-ambulance-wl-list></tj-ambulance-wl-list>`,
     });
     const wlList = page.rootInstance as tjAmbulanceWlList;
-      const expectedPatients = wlList?.waitingPatients?.length
+    const expectedPatients = wlList?.waitingPatients?.length
 
-      const items = page.root.shadowRoot.querySelectorAll("md-list-item");
-      expect(items.length).toEqual(expectedPatients);
+    const items = page.root.shadowRoot.querySelectorAll("md-list-item");
+    expect(items.length).toEqual(expectedPatients);
   });
 });
