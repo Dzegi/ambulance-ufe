@@ -6,6 +6,12 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface TjAmbulanceWlApp {
+        /**
+          * @default ""
+         */
+        "basePath": string;
+    }
     interface TjAmbulanceWlEditor {
         "entryId": string;
     }
@@ -16,7 +22,17 @@ export interface TjAmbulanceWlEditorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLTjAmbulanceWlEditorElement;
 }
+export interface TjAmbulanceWlListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLTjAmbulanceWlListElement;
+}
 declare global {
+    interface HTMLTjAmbulanceWlAppElement extends Components.TjAmbulanceWlApp, HTMLStencilElement {
+    }
+    var HTMLTjAmbulanceWlAppElement: {
+        prototype: HTMLTjAmbulanceWlAppElement;
+        new (): HTMLTjAmbulanceWlAppElement;
+    };
     interface HTMLTjAmbulanceWlEditorElementEventMap {
         "editor-closed": string;
     }
@@ -34,30 +50,53 @@ declare global {
         prototype: HTMLTjAmbulanceWlEditorElement;
         new (): HTMLTjAmbulanceWlEditorElement;
     };
+    interface HTMLTjAmbulanceWlListElementEventMap {
+        "entry-clicked": string;
+    }
     interface HTMLTjAmbulanceWlListElement extends Components.TjAmbulanceWlList, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLTjAmbulanceWlListElementEventMap>(type: K, listener: (this: HTMLTjAmbulanceWlListElement, ev: TjAmbulanceWlListCustomEvent<HTMLTjAmbulanceWlListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLTjAmbulanceWlListElementEventMap>(type: K, listener: (this: HTMLTjAmbulanceWlListElement, ev: TjAmbulanceWlListCustomEvent<HTMLTjAmbulanceWlListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLTjAmbulanceWlListElement: {
         prototype: HTMLTjAmbulanceWlListElement;
         new (): HTMLTjAmbulanceWlListElement;
     };
     interface HTMLElementTagNameMap {
+        "tj-ambulance-wl-app": HTMLTjAmbulanceWlAppElement;
         "tj-ambulance-wl-editor": HTMLTjAmbulanceWlEditorElement;
         "tj-ambulance-wl-list": HTMLTjAmbulanceWlListElement;
     }
 }
 declare namespace LocalJSX {
+    interface TjAmbulanceWlApp {
+        /**
+          * @default ""
+         */
+        "basePath"?: string;
+    }
     interface TjAmbulanceWlEditor {
         "entryId"?: string;
         "onEditor-closed"?: (event: TjAmbulanceWlEditorCustomEvent<string>) => void;
     }
     interface TjAmbulanceWlList {
+        "onEntry-clicked"?: (event: TjAmbulanceWlListCustomEvent<string>) => void;
     }
 
+    interface TjAmbulanceWlAppAttributes {
+        "basePath": string;
+    }
     interface TjAmbulanceWlEditorAttributes {
         "entryId": string;
     }
 
     interface IntrinsicElements {
+        "tj-ambulance-wl-app": Omit<TjAmbulanceWlApp, keyof TjAmbulanceWlAppAttributes> & { [K in keyof TjAmbulanceWlApp & keyof TjAmbulanceWlAppAttributes]?: TjAmbulanceWlApp[K] } & { [K in keyof TjAmbulanceWlApp & keyof TjAmbulanceWlAppAttributes as `attr:${K}`]?: TjAmbulanceWlAppAttributes[K] } & { [K in keyof TjAmbulanceWlApp & keyof TjAmbulanceWlAppAttributes as `prop:${K}`]?: TjAmbulanceWlApp[K] };
         "tj-ambulance-wl-editor": Omit<TjAmbulanceWlEditor, keyof TjAmbulanceWlEditorAttributes> & { [K in keyof TjAmbulanceWlEditor & keyof TjAmbulanceWlEditorAttributes]?: TjAmbulanceWlEditor[K] } & { [K in keyof TjAmbulanceWlEditor & keyof TjAmbulanceWlEditorAttributes as `attr:${K}`]?: TjAmbulanceWlEditorAttributes[K] } & { [K in keyof TjAmbulanceWlEditor & keyof TjAmbulanceWlEditorAttributes as `prop:${K}`]?: TjAmbulanceWlEditor[K] };
         "tj-ambulance-wl-list": TjAmbulanceWlList;
     }
@@ -66,6 +105,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "tj-ambulance-wl-app": LocalJSX.IntrinsicElements["tj-ambulance-wl-app"] & JSXBase.HTMLAttributes<HTMLTjAmbulanceWlAppElement>;
             "tj-ambulance-wl-editor": LocalJSX.IntrinsicElements["tj-ambulance-wl-editor"] & JSXBase.HTMLAttributes<HTMLTjAmbulanceWlEditorElement>;
             "tj-ambulance-wl-list": LocalJSX.IntrinsicElements["tj-ambulance-wl-list"] & JSXBase.HTMLAttributes<HTMLTjAmbulanceWlListElement>;
         }
