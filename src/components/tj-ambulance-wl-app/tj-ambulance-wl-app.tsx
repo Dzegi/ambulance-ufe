@@ -11,8 +11,9 @@ declare global {
 })
 export class TjAmbulanceWlApp {
   @State() private relativePath = "";
-
   @Prop() basePath: string="";
+  @Prop() apiBase: string;
+  @Prop() ambulanceId: string;
 
   componentWillLoad() {
     const baseUri = new URL(this.basePath, document.baseURI || "/").pathname;
@@ -55,7 +56,7 @@ export class TjAmbulanceWlApp {
         ? <tj-ambulance-wl-editor entry-id={entryId}
             oneditor-closed={ () => navigate("./list")} >
           </tj-ambulance-wl-editor>
-        : <tj-ambulance-wl-list
+        : <tj-ambulance-wl-list  ambulance-id={this.ambulanceId} api-base={this.apiBase}
             onentry-clicked={ (ev: CustomEvent<string>)=> navigate("./entry/" + ev.detail) } >
           </tj-ambulance-wl-list>
         }

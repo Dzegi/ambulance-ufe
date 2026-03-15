@@ -7,6 +7,8 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface TjAmbulanceWlApp {
+        "ambulanceId": string;
+        "apiBase": string;
         /**
           * @default ""
          */
@@ -16,6 +18,8 @@ export namespace Components {
         "entryId": string;
     }
     interface TjAmbulanceWlList {
+        "ambulanceId": string;
+        "apiBase": string;
     }
 }
 export interface TjAmbulanceWlEditorCustomEvent<T> extends CustomEvent<T> {
@@ -75,6 +79,8 @@ declare global {
 }
 declare namespace LocalJSX {
     interface TjAmbulanceWlApp {
+        "ambulanceId"?: string;
+        "apiBase"?: string;
         /**
           * @default ""
          */
@@ -85,20 +91,28 @@ declare namespace LocalJSX {
         "onEditor-closed"?: (event: TjAmbulanceWlEditorCustomEvent<string>) => void;
     }
     interface TjAmbulanceWlList {
+        "ambulanceId"?: string;
+        "apiBase"?: string;
         "onEntry-clicked"?: (event: TjAmbulanceWlListCustomEvent<string>) => void;
     }
 
     interface TjAmbulanceWlAppAttributes {
         "basePath": string;
+        "apiBase": string;
+        "ambulanceId": string;
     }
     interface TjAmbulanceWlEditorAttributes {
         "entryId": string;
+    }
+    interface TjAmbulanceWlListAttributes {
+        "apiBase": string;
+        "ambulanceId": string;
     }
 
     interface IntrinsicElements {
         "tj-ambulance-wl-app": Omit<TjAmbulanceWlApp, keyof TjAmbulanceWlAppAttributes> & { [K in keyof TjAmbulanceWlApp & keyof TjAmbulanceWlAppAttributes]?: TjAmbulanceWlApp[K] } & { [K in keyof TjAmbulanceWlApp & keyof TjAmbulanceWlAppAttributes as `attr:${K}`]?: TjAmbulanceWlAppAttributes[K] } & { [K in keyof TjAmbulanceWlApp & keyof TjAmbulanceWlAppAttributes as `prop:${K}`]?: TjAmbulanceWlApp[K] };
         "tj-ambulance-wl-editor": Omit<TjAmbulanceWlEditor, keyof TjAmbulanceWlEditorAttributes> & { [K in keyof TjAmbulanceWlEditor & keyof TjAmbulanceWlEditorAttributes]?: TjAmbulanceWlEditor[K] } & { [K in keyof TjAmbulanceWlEditor & keyof TjAmbulanceWlEditorAttributes as `attr:${K}`]?: TjAmbulanceWlEditorAttributes[K] } & { [K in keyof TjAmbulanceWlEditor & keyof TjAmbulanceWlEditorAttributes as `prop:${K}`]?: TjAmbulanceWlEditor[K] };
-        "tj-ambulance-wl-list": TjAmbulanceWlList;
+        "tj-ambulance-wl-list": Omit<TjAmbulanceWlList, keyof TjAmbulanceWlListAttributes> & { [K in keyof TjAmbulanceWlList & keyof TjAmbulanceWlListAttributes]?: TjAmbulanceWlList[K] } & { [K in keyof TjAmbulanceWlList & keyof TjAmbulanceWlListAttributes as `attr:${K}`]?: TjAmbulanceWlListAttributes[K] } & { [K in keyof TjAmbulanceWlList & keyof TjAmbulanceWlListAttributes as `prop:${K}`]?: TjAmbulanceWlList[K] };
     }
 }
 export { LocalJSX as JSX };
