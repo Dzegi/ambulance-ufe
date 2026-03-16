@@ -54,6 +54,7 @@ export class TjAmbulanceWlApp {
       <Host>
         { element === "editor"
         ? <tj-ambulance-wl-editor entry-id={entryId}
+            ambulance-id={this.ambulanceId} api-base={this.apiBase}
             oneditor-closed={ () => navigate("./list")} >
           </tj-ambulance-wl-editor>
         : <tj-ambulance-wl-list  ambulance-id={this.ambulanceId} api-base={this.apiBase}

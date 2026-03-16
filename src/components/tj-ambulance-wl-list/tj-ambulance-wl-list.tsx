@@ -1,5 +1,5 @@
+import { AmbulanceWaitingListApi, AmbulanceConditionsApi, WaitingListEntry, Configuration, Condition } from '../../api/ambulance-wl';
 import { Component, Event, EventEmitter, Host, Prop, State, h } from '@stencil/core';
-import { AmbulanceWaitingListApi, WaitingListEntry, Configuration } from '../../api/ambulance-wl';
 
 @Component({
   tag: 'tj-ambulance-wl-list',
@@ -11,6 +11,7 @@ export class tjAmbulanceWlList {
 @Prop() apiBase: string;
 @Prop() ambulanceId: string;
 @State() errorMessage: string;
+@State() conditions: Condition[];
 
   waitingPatients: WaitingListEntry[];
 
@@ -34,8 +35,32 @@ export class tjAmbulanceWlList {
     return [];
   }
 
+  private async getConditions(): Promise<Condition[]> {
+    try {
+      const configuration = new Configuration({
+        basePath: this.apiBase,
+      });
+
+      const conditionsApi = new AmbulanceConditionsApi(configuration);
+
+      const response = await conditionsApi.getConditionsRaw({ambulanceId: this.ambulanceId})
+      if (response.raw.status < 299) {
+        this.conditions = await response.value();
+      }
+    } catch (err: any) {
+      // no strong dependency on conditions
+    }
+    // always have some fallback condition
+    return this.conditions || [{
+      code: "fallback",
+      value: "Neurčený dôvod návštevy",
+      typicalDurationMinutes: 15,
+    }];
+  }
+
   async componentWillLoad() {
     this.waitingPatients = await this.getWaitingPatientsAsync();
+    this.getConditions();
   }
 
   render() {
@@ -54,6 +79,10 @@ export class tjAmbulanceWlList {
           )}
         </md-list>
         }
+        <md-filled-icon-button class="add-button"
+          onclick={() => this.entryClicked.emit("@new")}>
+          <md-icon>add</md-icon>
+        </md-filled-icon-button>
       </Host>
     );
   }
