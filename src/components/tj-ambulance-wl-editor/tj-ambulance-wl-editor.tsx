@@ -1,5 +1,5 @@
 import { Component, Host, Prop, State, h, EventEmitter, Event } from '@stencil/core';
-import { AmbulanceWaitingListApi, WaitingListEntry, Configuration } from '../../api/ambulance-wl';
+import { AmbulanceWaitingListApi, AmbulanceConditionsApi, WaitingListEntry, Configuration, Condition } from '../../api/ambulance-wl';
 
 @Component({
   tag: 'tj-ambulance-wl-editor',
@@ -17,6 +17,7 @@ export class TjAmbulanceWlEditor {
   @State() entry: WaitingListEntry;
   @State() errorMessage:string;
   @State() isValid: boolean;
+  @State() conditions: Condition[];
 
   private formElement: HTMLFormElement;
 
