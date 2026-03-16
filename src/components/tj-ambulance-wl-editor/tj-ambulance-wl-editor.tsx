@@ -23,6 +23,7 @@ export class TjAmbulanceWlEditor {
 
   async componentWillLoad() {
       this.getWaitingEntryAsync();
+      this.getConditions();
   }
 
   private async getWaitingEntryAsync(): Promise<WaitingListEntry> {
@@ -59,6 +60,29 @@ export class TjAmbulanceWlEditor {
       this.errorMessage = `Cannot retrieve list of waiting patients: ${err.message || "unknown"}`
     }
     return undefined;
+  }
+
+  private async getConditions(): Promise<Condition[]> {
+      try {
+        const configuration = new Configuration({
+          basePath: this.apiBase,
+        });
+
+        const conditionsApi = new AmbulanceConditionsApi(configuration);
+
+        const response = await conditionsApi.getConditionsRaw({ambulanceId: this.ambulanceId})
+        if (response.raw.status < 299) {
+          this.conditions = await response.value();
+        }
+      } catch (err: any) {
+        // no strong dependency on conditions
+      }
+      // always have some fallback condition
+      return this.conditions || [{
+        code: "fallback",
+        value: "Neurčený dôvod návštevy",
+        typicalDurationMinutes: 15,
+      }];
   }
 
   private handleSliderInput(event: Event) {
