@@ -18,8 +18,7 @@ import type {
   Condition,
 } from '../models';
 import {
-    ConditionFromJSON,
-    ConditionToJSON,
+    ConditionFromJSON
 } from '../models';
 
 export interface GetConditionsRequest {
@@ -28,7 +27,7 @@ export interface GetConditionsRequest {
 
 /**
  * AmbulanceConditionsApi - interface
- * 
+ *
  * @export
  * @interface AmbulanceConditionsApiInterface
  */
@@ -52,7 +51,7 @@ export interface AmbulanceConditionsApiInterface {
 }
 
 /**
- * 
+ *
  */
 export class AmbulanceConditionsApi extends runtime.BaseAPI implements AmbulanceConditionsApiInterface {
 
